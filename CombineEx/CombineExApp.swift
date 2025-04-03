@@ -13,7 +13,7 @@ struct CombineExApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ViewThatFitsEx()
+            ScrollViewReaderEx()
         }
         
     }
