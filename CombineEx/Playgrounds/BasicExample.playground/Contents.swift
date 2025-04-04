@@ -43,3 +43,22 @@ verifiedFailPublisher.sink { completion in
     print(sth)
 }.store(in: &cancellables)
 
+print("------------------------------------------- 다음은 배열을 발행 할 거고, 배열을 받아봅시다. -------------------------------------------")
+
+let pizzaToppings: Publishers.Sequence<[String], Never> = [
+    "Pepperoni", "Mushrooms", "Onions",
+    "Salami", "Bacon", "Extra cheese",
+    "Black olives", "Green peppers"
+].publisher
+
+pizzaToppings.sink { competion in
+    switch competion {
+        case .finished:
+            print("I'm done my job")
+        case .failure(let error):
+            print("I failed")
+    }
+} receiveValue: { input in
+    print(input)
+}
+.store(in: &cancellables)
