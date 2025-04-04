@@ -62,3 +62,38 @@ pizzaToppings.sink { competion in
     print(input)
 }
 .store(in: &cancellables)
+
+print("------------------------------------------- CurrentValueSubject -------------------------------------------")
+
+let currentValueSubjectPublisher: CurrentValueSubject<Double, Never> = .init(20)
+// 현재값 즉, 마지막 값을 항상 쥐고 있음. 그래서 구독 시에 쥐고 있는 값이 떨어지고 시작.
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+    (0..<10).forEach { number in
+        currentValueSubjectPublisher.send(Double(number))
+    }
+}
+
+
+currentValueSubjectPublisher
+    .dropFirst() // 하지만 이 메서드를 사용한다면 초기값 한 번을 버릴 수 있음.
+    .sink(receiveValue: { print($0) })
+    .store(in: &cancellables)
+
+
+
+let passthroughSubjectPublisher: PassthroughSubject<Int, Never> = .init()
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
+    print("------------------------------------------- PassthroughSubject -------------------------------------------")
+    (0..<10).forEach { number in
+        passthroughSubjectPublisher.send(number)
+    }
+}
+
+
+passthroughSubjectPublisher
+    .sink(receiveValue: { print($0) })
+    .store(in: &cancellables)
+
+// 이 친구는 구독 시에 마지막 값을 던지고 시작하지 않음.
