@@ -47,12 +47,20 @@ public class MapOperator {
             .map { orders -> [String] in
                 orders.map { $0.id }
             }
-            .sink { _ in
-                
-            } receiveValue: { ids in
+            .sink(receiveCompletion: { _ in }, receiveValue: { ids in
                 print(ids)
-            }.store(in: &cancellables)
+            })
+            .store(in: &cancellables)
         
         // 2. map 연산자를 사용하여 각 주문의 총액(가격 * 수량 + 배송비 3000원)을 계산하여 출력하세요
+        // [Order] -> [총액]
+        ordersPublisher
+            .map { orders in
+                orders.map { $0.price * $0.quantity + 3000 }
+            }
+            .sink(receiveCompletion: { _ in }, receiveValue: { orders in
+                print(orders)
+            })
+            .store(in: &cancellables)
     }
 }
