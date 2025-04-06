@@ -5,4 +5,4 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 
 //let map = MapOperator()
 //let filter = FilterOperator()
-//let collect = CollectOperator()
+let collect = CollectOperator()

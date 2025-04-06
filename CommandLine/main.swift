@@ -80,7 +80,9 @@ public class CollectOperator {
 
         // 2. 주문을 2개씩 묶어서 처리 - collect(2) 연산자 사용
         ordersPublisher
-        
+            .handleEvents(receiveSubscription: { _ in
+                print("===== 묶음 배송 주문 =====")
+            })
             .collect(2)
             .sink(receiveCompletion: {_ in}) { collection in
                 print("배송 묶음 [\(collection.map(\.id).joined(separator: ", "))]")
@@ -92,7 +94,8 @@ public class CollectOperator {
             .store(in: &cancellables)
         
         // 3. 카테고리별로 주문 그룹화 - collect()와 함께 Dictionary 그룹핑 사용
-       
+//        ordersPublisher
+            
             
         /**
          실행 결과는 다음과 같아야 합니다:
