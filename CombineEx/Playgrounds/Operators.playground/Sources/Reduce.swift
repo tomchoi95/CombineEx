@@ -74,20 +74,63 @@ public class ReduceOperator {
             .reduce(0, { $0 + $1.price * $1.quantity } )
             .sink(receiveCompletion: { _ in },
                   receiveValue: { total in
-                print("총 매출액: \(total.formatted(.number))원")
+                print("총 매출액: \(total.formatted(.number))원\n")
             })
             .store(in: &cancellables)
         
-        // 2. 카테고리별 최고가 상품 찾기 - collect()와 reduce() 연산자 조합 사용
+        // 2. 카테고리별 최고가 상품 찾기 - collect()와 Dictionary grouping 연산자 조합 사용
+        ordersPublisher
+            .handleEvents(receiveRequest:  { _ in
+                print("===== 카테고리별 최고가 상품 =====")
+            })
+            .collect()
+            .tryMap { orders -> [String: Order] in
+                let orderedDict = Dictionary(grouping: orders) { $0.category }
+                return orderedDict.mapValues { ordersInCategory in // [Order] 여기서 최댓값을 가지는 order로 매핑해야 함.
+                    guard let maxVal = ordersInCategory.max(by: { $0.price < $1.price }) else { fatalError() }
+                    return maxVal
+                }
+            }
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { dict in
+                dict.forEach { (key: String, value: Order) in
+                    print("\(key) 카테고리 최고가 상품: \(value.productName) - \(value.price.formatted(.number))원")
+                }
+                print("")
+            })
+            .store(in: &cancellables)
         
         // 3. 주문 수량 통계 - reduce() 연산자를 이용한 복합 통계 계산
-        
+        ordersPublisher
+            .collect()
+            .handleEvents(receiveSubscription: { _ in
+                print("===== 주문 수량 통계 =====")
+            })
+            .map { orders -> (totalQuantity: Int, totalOrders: Int, totalAmount: Int) in
+                orders.reduce(into: (totalQuantity: 0, totalOrders: 0, totalAmount: 0)) { result, order in
+                    result.totalQuantity += order.quantity
+                    result.totalOrders += 1
+                    result.totalAmount += order.price * order.quantity
+                }
+            }
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { stats in
+                print("총 주문 건수: \(stats.totalOrders)건")
+                print("총 상품 수량: \(stats.totalQuantity)개")
+                
+                let avgOrderPrice = stats.totalAmount / stats.totalOrders
+                let avgProductPrice = stats.totalAmount / stats.totalQuantity
+                
+                print("평균 주문 가격: \(avgOrderPrice.formatted(.number))원")
+                print("상품당 평균 가격: \(avgProductPrice.formatted(.number))원")
+            })
+            .store(in: &cancellables)
         
         /**
          실행 결과는 다음과 같아야 합니다:
          
          ===== 총 매출액 계산 =====
-         총 매출액: 3,490,000원
+         총 매출액: 3,460,000원
          
          ===== 카테고리별 최고가 상품 =====
          전자기기 카테고리 최고가 상품: 노트북 - 1,250,000원
@@ -97,8 +140,8 @@ public class ReduceOperator {
          ===== 주문 수량 통계 =====
          총 주문 건수: 8건
          총 상품 수량: 11개
-         평균 주문 가격: 436,250원
-         상품당 평균 가격: 317,273원
+         평균 주문 가격: 432,500원
+         상품당 평균 가격: 314,545원
          */
     }
 } 

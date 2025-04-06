@@ -82,15 +82,18 @@ public class ReduceOperator {
                 print("===== 카테고리별 최고가 상품 =====")
             })
             .collect()
-            .tryMap { Dictionary(grouping: $0) { $0.category } }
-            .map { dict in
-                dict.values.forEach { value in
-                    value.reduce(0) { max($0, $1.price) }
+            .tryMap { orders -> [String: Order] in
+                let orderedDict = Dictionary(grouping: orders) { $0.category }
+                return orderedDict.mapValues { ordersInCategory in // [Order] 여기서 최댓값을 가지는 order로 매핑해야 함.
+                    guard let maxVal = ordersInCategory.max(by: { $0.price < $1.price }) else { fatalError() }
+                    return maxVal
                 }
             }
             .sink(receiveCompletion: { _ in },
                   receiveValue: { dict in
-//                print("총 매출액: \(dict total.formatted(.number))원")
+                dict.forEach { (key: String, value: Order) in
+                    print("\(key) 카테고리 최고가 상품: \(value.productName) - \(value.price.formatted(.number))원")
+                }
             })
             .store(in: &cancellables)
         // 3. 주문 수량 통계 - reduce() 연산자를 이용한 복합 통계 계산
