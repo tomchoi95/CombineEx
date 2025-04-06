@@ -28,11 +28,6 @@ public class CollectOperator {
         let price: Int
         let quantity: Int
         let timestamp: Date
-        
-        enum CodingKeys: String, CodingKey {
-            case id, productName, category, price, quantity, timestamp
-        }
-        
     }
     
     // JSON 데이터
@@ -59,7 +54,11 @@ public class CollectOperator {
                 throw NSError(domain: "JSONError", code: 1, userInfo: nil)
             }
         }
-        .decode(type: [Order].self, decoder: JSONDecoder())
+        .tryMap { data -> [Order] in
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            return try decoder.decode([Order].self, from: data)
+        }
         .map { orders -> AnyPublisher<Order, Never> in
             Publishers.Sequence<[Order], Never>(sequence: orders).eraseToAnyPublisher()
         }
@@ -68,7 +67,17 @@ public class CollectOperator {
     
     public init() {
         // 1. 모든 주문을 수집하여 한 번에 처리 - collect() 연산자 사용
-        
+       ordersPublisher
+            .collect()
+            .sink(receiveCompletion: {_ in} ) { collection in
+                print("===== 일괄 처리 주문 목록 (총 \(collection.count)건) =====")
+                collection.forEach { order in
+                    print("\(order.id): \(order.productName) - \(order.price.formatted(.number))원")
+                }
+                print("총 주문 금액: \(collection.reduce(0, { first, second in first + second.price * second.quantity }).formatted(.number))원")
+            }
+            .store(in: &cancellables)
+
         // 2. 주문을 2개씩 묶어서 처리 - collect(2) 연산자 사용
         
         // 3. 카테고리별로 주문 그룹화 - collect()와 함께 Dictionary 그룹핑 사용
