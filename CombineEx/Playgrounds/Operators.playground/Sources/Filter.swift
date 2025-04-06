@@ -62,7 +62,7 @@ public class FilterOperator {
                     case .failure(let e):
                         print(e)
                     case .finished:
-                        print("1번 문제 종로.")
+                        print("1번 문제 종료.\n")
                 }
             } receiveValue: { orders in
                 orders.forEach { order in
@@ -82,7 +82,7 @@ public class FilterOperator {
                     case .failure(let e):
                         print(e)
                     case .finished:
-                        print("2번 문제 종로.")
+                        print("2번 문제 종료.\n")
                 }
             } receiveValue: { orders in
                 orders.forEach { order in
@@ -92,8 +92,23 @@ public class FilterOperator {
             .store(in: &cancellables)
         
         // 3. "전자기기" 카테고리에 속한 상품 주문만 필터링 - filter 연산자 사용
-        
-        
+        ordersPublisher
+            .map { orders in
+                orders.filter { $0.category == "전자기기"}
+            }
+            .sink { completion in
+                switch completion {
+                    case .failure(let e):
+                        print(e)
+                    case .finished:
+                        print("3번 문제 종로.")
+                }
+            } receiveValue: { orders in
+                orders.forEach { order in
+                    print("\(order.id): \(order.productName)")
+                }
+            }
+            .store(in: &cancellables)
         /**
          필터링 결과는 다음과 같이 나와야 합니다:
          10만원 이상인 주문 (고가 주문):
