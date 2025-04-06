@@ -81,10 +81,12 @@ public class CollectOperator {
         // 2. 주문을 2개씩 묶어서 처리 - collect(2) 연산자 사용
         ordersPublisher
             .collect(2)
-            .sink(receiveCompletion: {_ in}) { data in
-                
-//                print("배송 붂음 [\(data.map($0.))]")
-                print(data)
+            .sink(receiveCompletion: {_ in}) { collection in
+                print("배송 묶음 [\(collection.map(\.id).joined(separator: ", "))]")
+                collection.forEach { item in
+                    print("- \(item.productName) (\(item.quantity)개)")
+                }
+               print("")
             }
             .store(in: &cancellables)
         // 3. 카테고리별로 주문 그룹화 - collect()와 함께 Dictionary 그룹핑 사용

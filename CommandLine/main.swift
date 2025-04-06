@@ -80,6 +80,7 @@ public class CollectOperator {
 
         // 2. 주문을 2개씩 묶어서 처리 - collect(2) 연산자 사용
         ordersPublisher
+        
             .collect(2)
             .sink(receiveCompletion: {_ in}) { collection in
                 print("배송 묶음 [\(collection.map(\.id).joined(separator: ", "))]")
