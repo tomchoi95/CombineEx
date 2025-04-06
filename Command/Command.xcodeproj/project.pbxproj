@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B3CBE0CE2DA267BB00C65A01 /* CopyFiles */ = {
+		B3CBE0C02DA2676500C65A01 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -19,32 +19,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B355E21F2D9D6F3B0031A775 /* CombineEx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CombineEx.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3CBE0D02DA267BB00C65A01 /* CommandLine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CommandLine; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3CBE0C22DA2676500C65A01 /* Command */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Command; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B355E2212D9D6F3B0031A775 /* CombineEx */ = {
+		B3CBE0C42DA2676500C65A01 /* Command */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CombineEx;
-			sourceTree = "<group>";
-		};
-		B3CBE0D12DA267BB00C65A01 /* CommandLine */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CommandLine;
+			path = Command;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B355E21C2D9D6F3B0031A775 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3CBE0CD2DA267BB00C65A01 /* Frameworks */ = {
+		B3CBE0BF2DA2676500C65A01 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -54,20 +41,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B355E2162D9D6F3B0031A775 = {
+		B3CBE0B92DA2676500C65A01 = {
 			isa = PBXGroup;
 			children = (
-				B355E2212D9D6F3B0031A775 /* CombineEx */,
-				B3CBE0D12DA267BB00C65A01 /* CommandLine */,
-				B355E2202D9D6F3B0031A775 /* Products */,
+				B3CBE0C42DA2676500C65A01 /* Command */,
+				B3CBE0C32DA2676500C65A01 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		B355E2202D9D6F3B0031A775 /* Products */ = {
+		B3CBE0C32DA2676500C65A01 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B355E21F2D9D6F3B0031A775 /* CombineEx.app */,
-				B3CBE0D02DA267BB00C65A01 /* CommandLine */,
+				B3CBE0C22DA2676500C65A01 /* Command */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,107 +60,64 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B355E21E2D9D6F3B0031A775 /* CombineEx */ = {
+		B3CBE0C12DA2676500C65A01 /* Command */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B355E22A2D9D6F3D0031A775 /* Build configuration list for PBXNativeTarget "CombineEx" */;
+			buildConfigurationList = B3CBE0C92DA2676500C65A01 /* Build configuration list for PBXNativeTarget "Command" */;
 			buildPhases = (
-				B355E21B2D9D6F3B0031A775 /* Sources */,
-				B355E21C2D9D6F3B0031A775 /* Frameworks */,
-				B355E21D2D9D6F3B0031A775 /* Resources */,
+				B3CBE0BE2DA2676500C65A01 /* Sources */,
+				B3CBE0BF2DA2676500C65A01 /* Frameworks */,
+				B3CBE0C02DA2676500C65A01 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				B355E2212D9D6F3B0031A775 /* CombineEx */,
+				B3CBE0C42DA2676500C65A01 /* Command */,
 			);
-			name = CombineEx;
+			name = Command;
 			packageProductDependencies = (
 			);
-			productName = CombineEx;
-			productReference = B355E21F2D9D6F3B0031A775 /* CombineEx.app */;
-			productType = "com.apple.product-type.application";
-		};
-		B3CBE0CF2DA267BB00C65A01 /* CommandLine */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B3CBE0D42DA267BB00C65A01 /* Build configuration list for PBXNativeTarget "CommandLine" */;
-			buildPhases = (
-				B3CBE0CC2DA267BB00C65A01 /* Sources */,
-				B3CBE0CD2DA267BB00C65A01 /* Frameworks */,
-				B3CBE0CE2DA267BB00C65A01 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				B3CBE0D12DA267BB00C65A01 /* CommandLine */,
-			);
-			name = CommandLine;
-			packageProductDependencies = (
-			);
-			productName = CommandLine;
-			productReference = B3CBE0D02DA267BB00C65A01 /* CommandLine */;
+			productName = Command;
+			productReference = B3CBE0C22DA2676500C65A01 /* Command */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B355E2172D9D6F3B0031A775 /* Project object */ = {
+		B3CBE0BA2DA2676500C65A01 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
-					B355E21E2D9D6F3B0031A775 = {
-						CreatedOnToolsVersion = 16.3;
-					};
-					B3CBE0CF2DA267BB00C65A01 = {
+					B3CBE0C12DA2676500C65A01 = {
 						CreatedOnToolsVersion = 16.3;
 					};
 				};
 			};
-			buildConfigurationList = B355E21A2D9D6F3B0031A775 /* Build configuration list for PBXProject "CombineEx" */;
+			buildConfigurationList = B3CBE0BD2DA2676500C65A01 /* Build configuration list for PBXProject "Command" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = B355E2162D9D6F3B0031A775;
+			mainGroup = B3CBE0B92DA2676500C65A01;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = B355E2202D9D6F3B0031A775 /* Products */;
+			productRefGroup = B3CBE0C32DA2676500C65A01 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B355E21E2D9D6F3B0031A775 /* CombineEx */,
-				B3CBE0CF2DA267BB00C65A01 /* CommandLine */,
+				B3CBE0C12DA2676500C65A01 /* Command */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		B355E21D2D9D6F3B0031A775 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		B355E21B2D9D6F3B0031A775 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3CBE0CC2DA267BB00C65A01 /* Sources */ = {
+		B3CBE0BE2DA2676500C65A01 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -185,7 +127,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		B355E2282D9D6F3D0031A775 /* Debug */ = {
+		B3CBE0C72DA2676500C65A01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -238,18 +180,18 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		B355E2292D9D6F3D0031A775 /* Release */ = {
+		B3CBE0C82DA2676500C65A01 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -296,94 +238,33 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		B355E22B2D9D6F3D0031A775 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q22HZ2NAV4;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.co.codegrove.Tom.CombineEx;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		B355E22C2D9D6F3D0031A775 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q22HZ2NAV4;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.co.codegrove.Tom.CombineEx;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		B3CBE0D52DA267BB00C65A01 /* Debug */ = {
+		B3CBE0CA2DA2676500C65A01 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q22HZ2NAV4;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		B3CBE0D62DA267BB00C65A01 /* Release */ = {
+		B3CBE0CB2DA2676500C65A01 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q22HZ2NAV4;
 				ENABLE_HARDENED_RUNTIME = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -391,34 +272,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B355E21A2D9D6F3B0031A775 /* Build configuration list for PBXProject "CombineEx" */ = {
+		B3CBE0BD2DA2676500C65A01 /* Build configuration list for PBXProject "Command" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B355E2282D9D6F3D0031A775 /* Debug */,
-				B355E2292D9D6F3D0031A775 /* Release */,
+				B3CBE0C72DA2676500C65A01 /* Debug */,
+				B3CBE0C82DA2676500C65A01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B355E22A2D9D6F3D0031A775 /* Build configuration list for PBXNativeTarget "CombineEx" */ = {
+		B3CBE0C92DA2676500C65A01 /* Build configuration list for PBXNativeTarget "Command" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B355E22B2D9D6F3D0031A775 /* Debug */,
-				B355E22C2D9D6F3D0031A775 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B3CBE0D42DA267BB00C65A01 /* Build configuration list for PBXNativeTarget "CommandLine" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B3CBE0D52DA267BB00C65A01 /* Debug */,
-				B3CBE0D62DA267BB00C65A01 /* Release */,
+				B3CBE0CA2DA2676500C65A01 /* Debug */,
+				B3CBE0CB2DA2676500C65A01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B355E2172D9D6F3B0031A775 /* Project object */;
+	rootObject = B3CBE0BA2DA2676500C65A01 /* Project object */;
 }
