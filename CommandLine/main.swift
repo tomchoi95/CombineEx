@@ -67,7 +67,7 @@ public class CollectOperator {
     
     public init() {
         // 1. 모든 주문을 수집하여 한 번에 처리 - collect() 연산자 사용
-       ordersPublisher
+        ordersPublisher
             .collect()
             .sink(receiveCompletion: {_ in} ) { collection in
                 print("===== 일괄 처리 주문 목록 (총 \(collection.count)건) =====")
@@ -77,7 +77,7 @@ public class CollectOperator {
                 print("총 주문 금액: \(collection.reduce(0, { first, second in first + second.price * second.quantity }).formatted(.number))원\n")
             }
             .store(in: &cancellables)
-
+        
         // 2. 주문을 2개씩 묶어서 처리 - collect(2) 연산자 사용
         ordersPublisher
             .handleEvents(receiveSubscription: { _ in
@@ -89,14 +89,23 @@ public class CollectOperator {
                 collection.forEach { item in
                     print("- \(item.productName) (\(item.quantity)개)")
                 }
-               print("")
+                print("")
             }
             .store(in: &cancellables)
         
         // 3. 카테고리별로 주문 그룹화 - collect()와 함께 Dictionary 그룹핑 사용
-//        ordersPublisher
-            
-            
+        ordersPublisher
+            .collect()
+            .map { Dictionary(grouping: $0) { $0.category } } //
+            .sink { _ in
+                
+            } receiveValue: { dict in
+                print(dict.keys)
+            }
+            .store(in: &cancellables)
+        
+        
+        
         /**
          실행 결과는 다음과 같아야 합니다:
          
