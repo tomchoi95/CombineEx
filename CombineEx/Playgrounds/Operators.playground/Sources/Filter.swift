@@ -67,14 +67,32 @@ public class FilterOperator {
             } receiveValue: { orders in
                 orders.forEach { order in
                     let total = order.price * order.quantity
-                    print("\(order.id): \(order.productName) (\(total.formatted(IntegerFormatStyle(locale: .current)))원)")
+                    print("\(order.id): \(order.productName) (\(total.formatted(.number))원)")
                 }
             }
             .store(in: &cancellables)
 
         // 2. 수량이 2개 이상인 주문만 필터링 - filter 연산자 사용
+        ordersPublisher
+            .map { orders in
+                orders.filter { $0.quantity >= 2}
+            }
+            .sink { completion in
+                switch completion {
+                    case .failure(let e):
+                        print(e)
+                    case .finished:
+                        print("2번 문제 종로.")
+                }
+            } receiveValue: { orders in
+                orders.forEach { order in
+                    print("\(order.id): \(order.productName) (\(order.quantity)개)")
+                }
+            }
+            .store(in: &cancellables)
         
         // 3. "전자기기" 카테고리에 속한 상품 주문만 필터링 - filter 연산자 사용
+        
         
         /**
          필터링 결과는 다음과 같이 나와야 합니다:
