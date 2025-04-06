@@ -1,6 +1,6 @@
 //
 //  Collect.swift
-//  
+//
 //
 //  Created by 최범수 on 2025-04-06.
 //
@@ -67,7 +67,7 @@ public class CollectOperator {
     
     public init() {
         // 1. 모든 주문을 수집하여 한 번에 처리 - collect() 연산자 사용
-       ordersPublisher
+        ordersPublisher
             .collect()
             .sink(receiveCompletion: {_ in} ) { collection in
                 print("===== 일괄 처리 주문 목록 (총 \(collection.count)건) =====")
@@ -77,21 +77,49 @@ public class CollectOperator {
                 print("총 주문 금액: \(collection.reduce(0, { first, second in first + second.price * second.quantity }).formatted(.number))원\n")
             }
             .store(in: &cancellables)
-
+        
         // 2. 주문을 2개씩 묶어서 처리 - collect(2) 연산자 사용
         ordersPublisher
+            .handleEvents(receiveSubscription: { _ in
+                print("===== 묶음 배송 주문 =====")
+            })
             .collect(2)
             .sink(receiveCompletion: {_ in}) { collection in
                 print("배송 묶음 [\(collection.map(\.id).joined(separator: ", "))]")
                 collection.forEach { item in
                     print("- \(item.productName) (\(item.quantity)개)")
                 }
-               print("")
+                print("")
             }
             .store(in: &cancellables)
+        
         // 3. 카테고리별로 주문 그룹화 - collect()와 함께 Dictionary 그룹핑 사용
-       
-            
+        ordersPublisher
+            .handleEvents(
+                receiveSubscription: { _ in
+                    print("===== 카테고리별 주문 통계 =====")
+                }
+            )
+            .collect()
+            .map { Dictionary(grouping: $0) { $0.category } } //
+            .sink { _ in
+            } receiveValue: { dict in
+                dict.forEach { component in
+                    let totalProductCount = component.value.reduce(0) { partialResult, next in
+                        partialResult + next.quantity
+                    }
+                    let totalPrice = component.value.reduce(0) { partialResult, next in
+                        partialResult + next.price * next.quantity
+                    }
+                    print("\(component.key)카테고리:")
+                    print("- 주문 건수: \(component.value.count)건")
+                    print("- 총 상품 수량: \(totalProductCount)개")
+                    print("- 총 금액: \(totalPrice.formatted(.number))원")
+                    print("")
+                }
+            }
+            .store(in: &cancellables)
+        
         /**
          실행 결과는 다음과 같아야 합니다:
          
@@ -129,4 +157,4 @@ public class CollectOperator {
          - 총 금액: 345,000원
          */
     }
-} 
+}
