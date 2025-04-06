@@ -67,6 +67,16 @@ public class ReduceOperator {
     
     public init() {
         // 1. 총 매출액 계산 - reduce() 연산자 사용
+        ordersPublisher
+            .handleEvents(receiveRequest:  { _ in
+                print("===== 총 매출액 계산 =====")
+            })
+            .reduce(0, { $0 + $1.price * $1.quantity } )
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { total in
+                print("총 매출액: \(total.formatted(.number))원")
+            })
+            .store(in: &cancellables)
         
         // 2. 카테고리별 최고가 상품 찾기 - collect()와 reduce() 연산자 조합 사용
         

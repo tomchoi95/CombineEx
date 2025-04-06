@@ -7,12 +7,12 @@
 		<key>BasicExample (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>0</integer>
 		</dict>
 		<key>CombineEx.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>7</integer>
 		</dict>
 		<key>CommandLine.xcscheme_^#shared#^_</key>
 		<dict>
@@ -22,22 +22,22 @@
 		<key>CustomOperator (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>4</integer>
 		</dict>
 		<key>CustomPublisher (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<key>CustomSubscriber (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<key>CustomSubscriberExam (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>6</integer>
 		</dict>
 		<key>MyPlayground (Playground).xcscheme</key>
 		<dict>
@@ -52,12 +52,12 @@
 		<key>Operators (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>1</integer>
 		</dict>
 		<key>sthNew (Playground).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>5</integer>
 		</dict>
 	</dict>
 </dict>
