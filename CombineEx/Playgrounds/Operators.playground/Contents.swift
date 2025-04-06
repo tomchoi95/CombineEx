@@ -4,4 +4,4 @@ import PlaygroundSupport
 PlaygroundPage.current.needsIndefiniteExecution = true
 
 //let map = MapOperator()
-let filter = FilterOperator()
+//let filter = FilterOperator()
