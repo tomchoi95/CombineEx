@@ -12,6 +12,13 @@ class SignUpFormViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var passwordComfirmation: String = ""
+    
+    // Output
+    @Published var isValid: Bool = false
+    @Published var usernameMessage = ""
+    @Published var passwordMessage = ""
+    
+    
 }
 
 struct SignUpForm: View {
@@ -22,7 +29,7 @@ struct SignUpForm: View {
         
         Form {
             Section {
-                TextField("Username", text: <#Binding<String>#>)
+                TextField("Username", text: $viewModel.username)
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
             } footer: {
@@ -31,15 +38,16 @@ struct SignUpForm: View {
             }
             
             Section {
-                SecureField("Password", text: <#Binding<String>#>)
-                SecureField("Username", text: <#Binding<String>#>)
+                SecureField("Password", text: $viewModel.password)
+                SecureField("Password Comfirmation", text: $viewModel.passwordComfirmation)
             }
             
             Section {
                 Button("Sign Up") {
-                    print("Signing up as ")
+                    print("Signing up as \(viewModel.username)")
                 }
-                .disabled(<#T##disabled: Bool##Bool#>)
+                
+                .disabled(!viewModel.isValid)
             }
         }
     }
