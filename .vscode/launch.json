@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:CombineEx}/UserNameAvailabilityServer",
+            "name": "Debug UserNameAvailabilityServer (UserNameAvailabilityServer)",
+            "program": "${workspaceFolder:CombineEx}/UserNameAvailabilityServer/.build/debug/UserNameAvailabilityServer",
+            "preLaunchTask": "swift: Build Debug UserNameAvailabilityServer (UserNameAvailabilityServer)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:CombineEx}/UserNameAvailabilityServer",
+            "name": "Release UserNameAvailabilityServer (UserNameAvailabilityServer)",
+            "program": "${workspaceFolder:CombineEx}/UserNameAvailabilityServer/.build/release/UserNameAvailabilityServer",
+            "preLaunchTask": "swift: Build Release UserNameAvailabilityServer (UserNameAvailabilityServer)"
+        }
+    ]
+}

@@ -101,30 +101,7 @@ public class ReduceOperator {
             .store(in: &cancellables)
         
         // 3. 주문 수량 통계 - reduce() 연산자를 이용한 복합 통계 계산
-        ordersPublisher
-            .collect()
-            .handleEvents(receiveSubscription: { _ in
-                print("===== 주문 수량 통계 =====")
-            })
-            .map { orders -> (totalQuantity: Int, totalOrders: Int, totalAmount: Int) in
-                orders.reduce(into: (totalQuantity: 0, totalOrders: 0, totalAmount: 0)) { result, order in
-                    result.totalQuantity += order.quantity
-                    result.totalOrders += 1
-                    result.totalAmount += order.price * order.quantity
-                }
-            }
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: { stats in
-                print("총 주문 건수: \(stats.totalOrders)건")
-                print("총 상품 수량: \(stats.totalQuantity)개")
-                
-                let avgOrderPrice = stats.totalAmount / stats.totalOrders
-                let avgProductPrice = stats.totalAmount / stats.totalQuantity
-                
-                print("평균 주문 가격: \(avgOrderPrice.formatted(.number))원")
-                print("상품당 평균 가격: \(avgProductPrice.formatted(.number))원")
-            })
-            .store(in: &cancellables)
+       
         
         /**
          실행 결과는 다음과 같아야 합니다:

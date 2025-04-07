@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 class SignUpFormViewModel: ObservableObject {
     // Input
@@ -18,7 +19,26 @@ class SignUpFormViewModel: ObservableObject {
     @Published var usernameMessage = ""
     @Published var passwordMessage = ""
     
+    private lazy var isUsernameLengthValidPublisher: AnyPublisher<Bool, Never> = {
+        $username
+            .map { $0.count >= 3 }
+            .eraseToAnyPublisher()
+    }()
     
+    private lazy var isPasswordMatchingPublisher: AnyPublisher<Bool, Never> = {
+        Publishers.CombineLatest($password, $passwordComfirmation)
+            .map(==)
+            .eraseToAnyPublisher()
+    }()
+    
+    init() {
+        isUsernameLengthValidPublisher
+            .assign(to: &$isValid)
+        // assign 은 이미 cancellabe을 만족함.
+        isUsernameLengthValidPublisher
+            .map { $0 ? "" : "Username too short. Needs to be at least 3 characters." }
+            .assign(to: &$usernameMessage)
+    }
 }
 
 struct SignUpForm: View {
@@ -33,13 +53,16 @@ struct SignUpForm: View {
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
             } footer: {
-                Text("")
+                Text(viewModel.usernameMessage)
                     .foregroundStyle(.red)
             }
             
             Section {
                 SecureField("Password", text: $viewModel.password)
                 SecureField("Password Comfirmation", text: $viewModel.passwordComfirmation)
+            } footer: {
+                Text(viewModel.passwordMessage)
+                    .foregroundStyle(.red)
             }
             
             Section {
