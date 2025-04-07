@@ -8,7 +8,10 @@
 import SwiftUI
 
 class SignUpFormViewModel: ObservableObject {
+    // Input
     @Published var username: String = ""
+    @Published var password: String = ""
+    @Published var passwordComfirmation: String = ""
 }
 
 struct SignUpForm: View {
@@ -20,13 +23,15 @@ struct SignUpForm: View {
         Form {
             Section {
                 TextField("Username", text: <#Binding<String>#>)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
             } footer: {
                 Text("")
                     .foregroundStyle(.red)
             }
             
             Section {
-                SecureField("Username", text: <#Binding<String>#>)
+                SecureField("Password", text: <#Binding<String>#>)
                 SecureField("Username", text: <#Binding<String>#>)
             }
             
