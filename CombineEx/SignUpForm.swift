@@ -9,10 +9,39 @@ import SwiftUI
 import Combine
 
 
+class SignUpFormViewModel: ObservableObject {
+    
+    @Published var userName: String = ""
+    @Published var password: String = ""
+    @Published var passwordConfirmation: String = ""
+    
+    @Published var userNameMessage: String = ""
+    @Published var passwordMessage: String = ""
+    @Published var isValid: Bool = false
+    
+//    private var cancellables = Set<AnyCancellable>()
+    
+    private var isUsernameMeetingAtleastThreePublisher: AnyPublisher<Bool, Never> {
+        // To activate the button, all conditions must be met.
+        // userName. at least 3 charactor.
+        $userName // 3개 이상을 만족하는지 Bool값을 publishing 합니다~
+            .map { $0.count >= 3 }
+            .eraseToAnyPublisher()
+        
+    }
+    
+    private var isPasswordSamePublisher: AnyPublisher<Bool, Never> {
+        $password // 비밀번호가 일치하는지 Bool값을 publishing 합니다.
+            .combineLatest($passwordConfirmation)
+            .map(==)
+            .eraseToAnyPublisher()
+    }
+    
+}
 
 struct SignUpForm: View {
     
-    @Binding var willBeBinded: String
+    @StateObject private var viewModel = SignUpFormViewModel()
     
     var body: some View {
         Form {
@@ -24,30 +53,34 @@ struct SignUpForm: View {
     
     private var idSection: some View {
         Section {
-            TextField("Username", text: $willBeBinded)
+            TextField("Username", text: $viewModel.userName)
                 .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
         } footer: {
-            Text(verbatim: "error")
+            Text(verbatim: viewModel.userNameMessage)
                 .foregroundStyle(.red)
         }
     }
     private var passwordSection: some View {
         Section {
-            SecureField("Password", text: $willBeBinded)
-            SecureField("Password Confirmation", text: $willBeBinded)
+            SecureField("Password", text: $viewModel.password)
+            SecureField("Password Confirmation", text: $viewModel.passwordConfirmation)
+        } footer: {
+            Text(viewModel.passwordMessage)
+                .foregroundStyle(.red)
         }
     }
     private var confirmButton: some View {
         Section {
-            Button("Sin in?") {
-                
+            Button("Sign in?") {
+                print("Singing up as \(viewModel.userName)")
             }
-//            .disabled(<#T##disabled: Bool##Bool#>)
+            .disabled(!viewModel.isValid)
         }
     }
     
 }
 
 #Preview {
-    SignUpForm(willBeBinded: .constant(""))
+    SignUpForm()
 }
