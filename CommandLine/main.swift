@@ -97,7 +97,9 @@ public class ReduceOperator {
             })
             .store(in: &cancellables)
         // 3. 주문 수량 통계 - reduce() 연산자를 이용한 복합 통계 계산
-        
+        ordersPublisher
+            .collect()
+            
         
         /**
          실행 결과는 다음과 같아야 합니다:
@@ -111,10 +113,10 @@ public class ReduceOperator {
          주방용품 카테고리 최고가 상품: 커피머신 - 220,000원
          
          ===== 주문 수량 통계 =====
-         총 주문 건수: 8건
-         총 상품 수량: 11개
-         평균 주문 가격: 436,250원
-         상품당 평균 가격: 317,273원
+         총 주문 건수: 8건                    // [Order].count
+         총 상품 수량: 11개                  // [Order].reduce (0) { $0 + $0.quantity }
+         평균 주문 가격: 436,250원     // 각각의 가격의 합 / 합한 갯수
+         상품당 평균 가격: 317,273원  //
          */
     }
 }
